@@ -2,6 +2,37 @@ import type { NextPage } from "next";
 import Head from "next/head";
 import Image from "next/image";
 import Layout from "../components/Layout";
+import React, { FC, useEffect, useState, Fragment } from "react";
+import { Tab } from "@headlessui/react";
+
+function classNames(...classes: any[]) {
+  return classes.filter(Boolean).join(" ");
+}
+
+const job_function = [
+  { id: 1, name: "Accounting" },
+  { id: 2, name: "Admin / HR" },
+  { id: 4, name: "Banking / Finance" },
+  { id: 5, name: "Building / Construction" },
+  { id: 6, name: "Business Consulting" },
+  { id: 7, name: "Design" },
+  { id: 8, name: "Education / Language" },
+  { id: 9, name: "Engineering" },
+  { id: 10, name: "Hospitality / Tourism / F&B / Hotel" },
+  { id: 11, name: "Insurance Related" },
+  { id: 12, name: "Interpreter / Translator" },
+  { id: 13, name: "IT Related" },
+  { id: 14, name: "Logistic / Transportation" },
+  { id: 15, name: "Management" },
+  { id: 16, name: "Manufacturing / Industrial Engineering" },
+  { id: 17, name: "Marketing / PR" },
+  { id: 18, name: "Media / Advertising" },
+  { id: 19, name: "Medical / Nursing / Health Related" },
+  { id: 20, name: "Merchandising / Sourcing Agent" },
+  { id: 21, name: "Property / Real Estate" },
+  { id: 22, name: "Sales / Customer Service / Call Center" },
+  { id: 23, name: "Others" },
+];
 
 const Home: NextPage = () => {
   return (
@@ -14,10 +45,10 @@ const Home: NextPage = () => {
 
       <div
         id="hero"
-        className="min-h-screen  w-full px-5 md:px-10 xl:px-0 flex justify-center pt-10 pb-5 relative "
+        className=" w-full px-5 md:px-10 xl:px-0 flex justify-center pt-10 pb-5 relative "
       >
-        <div className="max-w-7xl w-full h-full relative grid grid-cols-3 gap-4">
-          <form className="flex flex-col gap-4 rounded-md border p-4">
+        <div className="max-w-7xl w-full h-full relative grid grid-cols-1 lg:grid-cols-3 gap-4 justify-items-center">
+          <form className="flex flex-col gap-4 rounded-md border p-4 w-full">
             <div className="bg-[#E6E6E6] w-full p-4 flex flex-col gap-4">
               <div className="flex gap-4">
                 <div className="w-32 h-16 bg-white rounded p-2 flex flex-col gap-1 justify-center items-center text-[#B3B3B3] hover:bg-[#EEEEDD] hover:text-[#82170F] hover:border-[#82170F] hover:border duration-300 cursor-pointer">
@@ -87,7 +118,12 @@ const Home: NextPage = () => {
                 />
 
                 <div className="inline-flex gap-2">
-                  <input id="nearme" type="checkbox" />
+                  <input
+                    id="nearme"
+                    type="checkbox"
+                    className="accent-[#82170F]"
+                    defaultChecked={false}
+                  />
                   <label htmlFor="nearme" className="font-bold">
                     Near Me
                   </label>
@@ -116,7 +152,7 @@ const Home: NextPage = () => {
               <div className="flex flex-col gap-2">
                 <div className="flex justify-between">
                   <label htmlFor="Business" className="font-bold">
-                    Business Industry:
+                    text-sm Business Industry:
                   </label>
 
                   <p className="text-[#B3B3B3] text-sm">1/5</p>
@@ -154,7 +190,9 @@ const Home: NextPage = () => {
                     type="radio"
                     value=""
                     name="default-radio"
-                    className="w-4 h-4 text-[#82170F] bg-gray-100 border-gray-300 accent-[#82170F] "
+                    className="w-4 h-4 text-[#82170F] bg-gray-100 border-gray-300 accent-[#82170F]"
+                    checked={true}
+                    readOnly
                   />
 
                   <label
@@ -167,7 +205,6 @@ const Home: NextPage = () => {
 
                 <div className="flex items-center">
                   <input
-                    checked
                     id="default-radio-2"
                     type="radio"
                     value=""
@@ -199,10 +236,12 @@ const Home: NextPage = () => {
             </button>
           </form>
 
-          <div className=" col-span-2 w-full h-full relative flex flex-col">
-            <div className="h-4/5 w-full bg-slate-500 "></div>
+          <div className=" lg:col-span-2 w-full h-full relative flex flex-col">
+            <div className="h-4/5 min-h-[500px] w-full relative bg-[url('/assets/Rectangle139.png')] bg-cover bg-right bg-no-repeat">
+              {/* <Image src="/assets/Slider.png" alt="slide" fill /> */}
+            </div>
 
-            <div className="flex-1 grid grid-cols-3 gap-4">
+            <div className="flex-1 grid grid-cols-1 md:grid-cols-3 gap-4">
               <div className="w-full flex gap-4 relative p-4 items-center">
                 <div className="shrink-0 w-16 h-16 text-[#82170F] relative">
                   <Image src="/assets/document.svg" alt="document" fill />
@@ -262,6 +301,52 @@ const Home: NextPage = () => {
               <p className="text-[#82170F]">View All</p>
             </div>
           </div>
+
+          <div className="w-full grid grid-cols-1 md:grid-cols-3 xl:grid-cols-5 gap-4">
+            <div className="h-64 w-full py-4 flex flex-col gap-2">
+              <div className="h-44 w-full bg-[#F7F7F7] shrink-0"></div>
+
+              <div>
+                <p className="font-bold">Company Name</p>
+                <p className="text-black/70 text-sm">Business Industry</p>
+              </div>
+            </div>
+            <div className="h-64 w-full py-4 flex flex-col gap-2">
+              <div className="h-44 w-full bg-[#F7F7F7] shrink-0"></div>
+
+              <div>
+                <p className="font-bold">Company Name</p>
+                <p className="text-black/70 text-sm">Business Industry</p>
+              </div>
+            </div>
+
+            <div className="h-64 w-full py-4 flex flex-col gap-2">
+              <div className="h-44 w-full bg-[#F7F7F7] shrink-0"></div>
+
+              <div>
+                <p className="font-bold">Company Name</p>
+                <p className="text-black/70 text-sm">Business Industry</p>
+              </div>
+            </div>
+
+            <div className="h-64 w-full py-4 xl:flex flex-col gap-2 hidden">
+              <div className="h-44 w-full bg-[#F7F7F7] shrink-0"></div>
+
+              <div>
+                <p className="font-bold">Company Name</p>
+                <p className="text-black/70 text-sm">Business Industry</p>
+              </div>
+            </div>
+
+            <div className="h-64 w-full py-4 xl:flex flex-col gap-2 hidden">
+              <div className="h-44 w-full bg-[#F7F7F7] shrink-0"></div>
+
+              <div>
+                <p className="font-bold">Company Name</p>
+                <p className="text-black/70 text-sm">Business Industry</p>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
 
@@ -280,6 +365,47 @@ const Home: NextPage = () => {
               <p className="text-[#82170F]">View All</p>
             </div>
           </div>
+
+          <div className="w-full grid grid-cols-1 md:grid-cols-3 xl:grid-cols-5 gap-4">
+            <div className="h-64 w-full py-4 flex flex-col gap-2">
+              <div className="h-44 w-full bg-[#F7F7F7] shrink-0  bg-[url('/assets/Frame1321315353.png')] bg-center bg-contain bg-no-repeat"></div>
+
+              <div>
+                <p className="font-bold">Recriutor Name</p>
+              </div>
+            </div>
+            <div className="h-64 w-full py-4 flex flex-col gap-2 ">
+              <div className="h-44 w-full bg-[#F7F7F7] shrink-0 bg-[url('/assets/Frame1321315353.png')] bg-center bg-contain bg-no-repeat"></div>
+
+              <div>
+                <p className="font-bold">Recriutor Name</p>
+              </div>
+            </div>
+
+            <div className="h-64 w-full py-4 flex flex-col gap-2 ">
+              <div className="h-44 w-full bg-[#F7F7F7] shrink-0 bg-[url('/assets/Frame1321315353.png')] bg-center bg-contain bg-no-repeat"></div>
+
+              <div>
+                <p className="font-bold">Recriutor Name</p>
+              </div>
+            </div>
+
+            <div className="h-64 w-full py-4 xl:flex flex-col gap-2 hidden ">
+              <div className="h-44 w-full bg-[#F7F7F7] shrink-0 bg-[url('/assets/Frame1321315353.png')] bg-center bg-contain bg-no-repeat"></div>
+
+              <div>
+                <p className="font-bold">Recriutor Name</p>
+              </div>
+            </div>
+
+            <div className="h-64 w-full py-4 xl:flex flex-col gap-2 hidden ">
+              <div className="h-44 w-full bg-[#F7F7F7] shrink-0 bg-[url('/assets/Frame1321315353.png')] bg-center bg-contain bg-no-repeat"></div>
+
+              <div>
+                <p className="font-bold">Recriutor Name</p>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
 
@@ -295,6 +421,119 @@ const Home: NextPage = () => {
               <p className="text-[#82170F]">View All</p>
             </div>
           </div>
+
+          <div className="w-full grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4 ">
+            {[...Array(6)].map((_, index) => (
+              <div
+                key={index}
+                className="h-[300px] w-full rounded-xl border p-4 flex flex-col gap-4 relative "
+              >
+                <div className="flex gap-4">
+                  <div className="h-20 w-20 shrink-0 relative">
+                    <Image src="/assets/Icon.svg" alt="logo" fill />
+                  </div>
+
+                  <div className="flex-1">
+                    <p className="font-bold ">
+                      Senior engineer / Sales & Marketing
+                    </p>
+                    <p className="font-bold text-sm">บริษัท ไทยชินเมวา จำกัด</p>
+                    <p className="text-sm">อ. เมืองชลบุรี จ. ชลบุรี</p>
+                  </div>
+                </div>
+
+                <div className="flex flex-col gap-2 border-b pb-4">
+                  <div className="flex gap-1 items-center ">
+                    <div className="w-5 h-5  relative shrink-0 text-[#B3B3B3] flex items-center ">
+                      <svg
+                        width="17"
+                        height="16"
+                        viewBox="0 0 17 16"
+                        fill="none"
+                        xmlns="http://www.w3.org/2000/svg"
+                      >
+                        <path
+                          d="M9.88411 10.0834C9.88411 10.3136 9.69766 10.5 9.46745 10.5H6.96745C6.73724 10.5 6.55078 10.3136 6.55078 10.0834V8.83335H1.55078V12.5834C1.55078 13.25 2.13411 13.8334 2.80078 13.8334H13.6341C14.3008 13.8334 14.8841 13.25 14.8841 12.5834V8.83335H9.88411V10.0834ZM13.6341 4.66669H11.5508V3.41669C11.5508 2.75002 10.9674 2.16669 10.3008 2.16669H6.13411C5.46745 2.16669 4.88411 2.75002 4.88411 3.41669V4.66669H2.80078C2.13411 4.66669 1.55078 5.25002 1.55078 5.91669V8.00002H14.8841V5.91669C14.8841 5.25002 14.3008 4.66669 13.6341 4.66669ZM9.88411 4.66669H6.55078V3.83335H9.88411V4.66669Z"
+                          fill="currentColor"
+                        />
+                      </svg>
+                    </div>
+                    <p className="text-sm align-middle">Full-Time</p>
+                  </div>
+
+                  <div className="flex gap-1 items-center ">
+                    <div className="w-5 h-5  relative shrink-0 text-[#B3B3B3] flex items-center ">
+                      <svg
+                        width="17"
+                        height="16"
+                        viewBox="0 0 17 16"
+                        fill="none"
+                        xmlns="http://www.w3.org/2000/svg"
+                      >
+                        <path
+                          d="M11.8841 7.33335C10.2258 7.33335 8.88411 8.67502 8.88411 10.3334C8.88411 11.9917 10.2258 13.3334 11.8841 13.3334C13.5424 13.3334 14.8841 11.9917 14.8841 10.3334C14.8841 8.67502 13.5424 7.33335 11.8841 7.33335ZM13.2174 10.4646C13.2174 10.575 13.1258 10.6667 13.0154 10.6667H11.7529C11.6424 10.6667 11.5508 10.575 11.5508 10.4646V8.86877C11.5508 8.75835 11.6424 8.66669 11.7529 8.66669H12.0154C12.1258 8.66669 12.2174 8.75835 12.2174 8.86877V10H13.0154C13.1258 10 13.2174 10.0917 13.2174 10.2021V10.4646ZM8.21745 10.3334C8.21745 9.75419 8.35703 9.20627 8.59661 8.71877C8.42995 8.68752 8.25911 8.66669 8.08412 8.66669H7.7362C7.2737 8.87919 6.75911 9.00002 6.21745 9.00002C5.67578 9.00002 5.16328 8.87919 4.6987 8.66669H4.35078C2.80495 8.66669 1.55078 9.92085 1.55078 11.4667V12.3334C1.55078 12.8854 1.9987 13.3334 2.55078 13.3334H9.78203C8.83828 12.6688 8.21745 11.5729 8.21745 10.3334ZM6.21745 8.00002C7.69036 8.00002 8.88411 6.80627 8.88411 5.33335C8.88411 3.86044 7.69036 2.66669 6.21745 2.66669C4.74453 2.66669 3.55078 3.86044 3.55078 5.33335C3.55078 6.80627 4.74453 8.00002 6.21745 8.00002Z"
+                          fill="currentColor"
+                        />
+                      </svg>
+                    </div>
+
+                    <p className="text-sm align-middle">
+                      2 years+ of experiences
+                    </p>
+                  </div>
+
+                  <div className="flex gap-1 items-center ">
+                    <div className="w-5 h-5  relative shrink-0 text-[#B3B3B3] flex items-center ">
+                      <svg
+                        width="17"
+                        height="16"
+                        viewBox="0 0 17 16"
+                        fill="none"
+                        xmlns="http://www.w3.org/2000/svg"
+                      >
+                        <path
+                          d="M13.5612 4.66669H3.63411C3.40391 4.66669 3.21745 4.48023 3.21745 4.25002C3.21745 4.01981 3.40391 3.83335 3.63411 3.83335H13.6341C13.8643 3.83335 14.0508 3.6469 14.0508 3.41669C14.0508 2.72632 13.4911 2.16669 12.8008 2.16669H3.21745C2.29688 2.16669 1.55078 2.91278 1.55078 3.83335V12.1667C1.55078 13.0873 2.29688 13.8334 3.21745 13.8334H13.5612C14.2909 13.8334 14.8841 13.2727 14.8841 12.5834V5.91669C14.8841 5.22736 14.2909 4.66669 13.5612 4.66669ZM12.3841 10.0834C11.924 10.0834 11.5508 9.71018 11.5508 9.25002C11.5508 8.78986 11.924 8.41669 12.3841 8.41669C12.8443 8.41669 13.2174 8.78986 13.2174 9.25002C13.2174 9.71018 12.8443 10.0834 12.3841 10.0834Z"
+                          fill="currentColor"
+                        />
+                      </svg>
+                    </div>
+
+                    <p className="text-sm align-middle">Salary: 15,000 Baht฿</p>
+                  </div>
+                </div>
+
+                <div id="jobtag" className="flex gap-2">
+                  <button className="px-4 py-1 rounded-lg bg-[#F3F2F2] text-sm">
+                    รับสมัครด่วน
+                  </button>
+                  <button className="px-4 py-1 rounded-lg bg-[#F3F2F2] text-sm">
+                    งานยอดนิยม
+                  </button>
+
+                  <button className="px-4 py-1 rounded-lg bg-[#F3F2F2] text-sm">
+                    Tag C
+                  </button>
+                </div>
+
+                <p className="text-xs -translate-y-1">Post date: 6 Sep 2022</p>
+
+                <button className="absolute top-4 right-4 w-11 h-11 bg-[#F3F2F2] rounded-md border flex justify-center items-center text-[#B3B3B3]">
+                  <svg
+                    width="18"
+                    height="23"
+                    viewBox="0 0 18 23"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      d="M15.4062 0.5H3.03125C1.89215 0.5 0.96875 1.4234 0.96875 2.5625V22.5L9.21875 17.6875L17.4688 22.5V2.5625C17.4688 1.4234 16.5454 0.5 15.4062 0.5ZM15.4062 18.9091L9.21875 15.2997L3.03125 18.9091V2.82031C3.03125 2.75194 3.05841 2.68636 3.10676 2.63801C3.15511 2.58966 3.22069 2.5625 3.28906 2.5625H15.1484C15.2908 2.5625 15.4062 2.67779 15.4062 2.82014V18.9091Z"
+                      fill="currentColor"
+                    />
+                  </svg>
+                </button>
+              </div>
+            ))}
+          </div>
         </div>
       </div>
 
@@ -305,12 +544,113 @@ const Home: NextPage = () => {
               <h1 className="text-3xl font-bold">Browse Jobs</h1>
             </div>
           </div>
+
+          <Tab.Group>
+            <Tab.List>
+              <Tab as={Fragment}>
+                {({ selected }) => (
+                  <button
+                    className={classNames(
+                      selected
+                        ? "border-b-2 border-[#82170F] text-[#82170F] font-bold"
+                        : "text-[#595959]",
+                      "px-4 py-2 min-w-[170px] focus:ring-0 focus:outline-none"
+                    )}
+                  >
+                    By Job Function
+                  </button>
+                )}
+              </Tab>
+
+              <Tab as={Fragment}>
+                {({ selected }) => (
+                  <button
+                    className={classNames(
+                      selected
+                        ? "border-b-2 border-[#82170F] text-[#82170F] font-bold"
+                        : "text-[#595959]",
+                      "px-4 py-2 min-w-[170px] focus:ring-0 focus:outline-none"
+                    )}
+                  >
+                    By Business Industry
+                  </button>
+                )}
+              </Tab>
+
+              <Tab as={Fragment}>
+                {({ selected }) => (
+                  <button
+                    className={classNames(
+                      selected
+                        ? "border-b-2 border-[#82170F] text-[#82170F] font-bold"
+                        : "text-[#595959]",
+                      "px-4 py-2 min-w-[170px] focus:ring-0 focus:outline-none"
+                    )}
+                  >
+                    By Location
+                  </button>
+                )}
+              </Tab>
+            </Tab.List>
+            <Tab.Panels>
+              <Tab.Panel
+                className={
+                  "w-full min-h-[350px] grid grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-2 justify-items-center"
+                }
+              >
+                {job_function.map((item, index) => (
+                  <button
+                    key={index}
+                    className="inline-flex items-center justify-center w-full p-2 border rounded-md  hover:bg-[#EEEEDD] hover:text-[#82170F] hover:border-[#82170F] hover:border duration-300 text-sm "
+                  >
+                    {item.name}
+                  </button>
+                ))}
+              </Tab.Panel>
+
+              <Tab.Panel
+                className={
+                  "w-full min-h-[350px] grid grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-2 justify-items-center"
+                }
+              >
+                {job_function.map((item, index) => (
+                  <button
+                    key={index}
+                    className="inline-flex items-center justify-center w-full p-2 border rounded-md  hover:bg-[#EEEEDD] hover:text-[#82170F] hover:border-[#82170F] hover:border duration-300 text-sm "
+                  >
+                    {item.name}
+                  </button>
+                ))}
+              </Tab.Panel>
+
+              <Tab.Panel
+                className={
+                  "w-full min-h-[350px] grid grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-2 justify-items-center"
+                }
+              >
+                {job_function.map((item, index) => (
+                  <button
+                    key={index}
+                    className="inline-flex items-center justify-center w-full p-2 border rounded-md  hover:bg-[#EEEEDD] hover:text-[#82170F] hover:border-[#82170F] hover:border duration-300 text-sm "
+                  >
+                    {item.name}
+                  </button>
+                ))}
+              </Tab.Panel>
+            </Tab.Panels>
+          </Tab.Group>
+        </div>
+      </div>
+
+      <div className="w-full px-5 md:px-10 xl:px-0 flex justify-center py-5  relative">
+        <div className="max-w-7xl w-full h-44 relative gap-4 flex bg-[#F3F2F2] justify-center items-center ">
+          <p className="font-bold">Banner Leaderboard</p>
         </div>
       </div>
 
       <div className="w-full px-5 md:px-10 xl:px-0 flex justify-center py-5  relative">
         <div className="max-w-7xl w-full h-full relative gap-4 flex flex-col">
-          <div className="flex justify-between items-center">
+          <div className="flex justify-between items-center border-b pb-4">
             <div>
               <h1 className="text-3xl font-bold">Updates</h1>
               <p>
@@ -323,12 +663,42 @@ const Home: NextPage = () => {
               <p className="text-[#82170F]">View All</p>
             </div>
           </div>
+
+          <div className="w-full grid grid-cols-1 md:grid-cols-3 gap-4 ">
+            {[...Array(3)].map((_, index) => (
+              <div
+                key={index}
+                className="h-[432px]  w-full rounded-xl  flex flex-col gap-4 relative"
+              >
+                <div className="h-3/5 w-full relative">
+                  <Image src="/assets/Rectangle628.png" alt="desktop" fill />
+                </div>
+
+                <div className="flex flex-col gap-1">
+                  <div className="px-2 py-1 rounded bg-[#EEEEDD] flex justify-center items-center text-xs w-fit">
+                    EVENT
+                  </div>
+
+                  <p className="font-bold">
+                    Event - Lorem ipsum dolor sit amet, consectetur adipiscing
+                    elit
+                  </p>
+
+                  <p className="text-[#595959] text-sm">
+                    Now it’s comes handy with Categories, just look up what
+                    career you want to
+                  </p>
+                  <p className="text-[#595959] text-sm">08/09/2022</p>
+                </div>
+              </div>
+            ))}
+          </div>
         </div>
       </div>
 
-      <div className="w-full px-5 md:px-10 xl:px-0 flex justify-center py-5  relative">
+      <div className="w-full px-5 md:px-10 xl:px-0 flex justify-center py-5 pb-10 relative">
         <div className="max-w-7xl w-full h-full relative gap-4 flex flex-col">
-          <div className="flex justify-between items-center">
+          <div className="flex justify-between items-center border-b pb-4">
             <div>
               <h1 className="text-3xl font-bold">Tips & Tricks</h1>
               <p>
@@ -340,6 +710,36 @@ const Home: NextPage = () => {
             <div className="shrink-0">
               <p className="text-[#82170F]">View All</p>
             </div>
+          </div>
+
+          <div className="w-full grid grid-cols-1 md:grid-cols-3 gap-4 ">
+            {[...Array(3)].map((_, index) => (
+              <div
+                key={index}
+                className="h-[432px]  w-full rounded-xl  flex flex-col gap-4 relative"
+              >
+                <div className="h-3/5 w-full relative">
+                  <Image src="/assets/Rectangle628.png" alt="desktop" fill />
+                </div>
+
+                <div className="flex flex-col gap-1">
+                  <div className="px-2 py-1 rounded bg-[#EEEEDD] flex justify-center items-center text-xs w-fit">
+                    Life@work
+                  </div>
+
+                  <p className="font-bold">
+                    Blog Title - Lorem ipsum dolor sit amet, consectetur
+                    adipiscing elit
+                  </p>
+
+                  <p className="text-[#595959] text-sm">
+                    Now it’s comes handy with Categories, just look up what
+                    career you want to
+                  </p>
+                  <p className="text-[#595959] text-sm">08/09/2022</p>
+                </div>
+              </div>
+            ))}
           </div>
         </div>
       </div>

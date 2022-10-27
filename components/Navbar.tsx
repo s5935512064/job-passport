@@ -39,12 +39,17 @@ const Navbar: FC<Props> = (): JSX.Element => {
             />
           </div>
 
-          <div className="flex-1 gap-4 flex ">
+          <div className="flex-1 gap-4 lg:flex hidden ">
             {menu.map((item, index) => (
               <button
                 key={index}
                 type="button"
-                className="min-w-[100px] text-center "
+                className={classNames(
+                  router.pathname === item.href
+                    ? "font-bold text-[#82170F]"
+                    : "",
+                  "min-w-[100px] text-center hover:scale-110 duration-300"
+                )}
               >
                 {item.name}
               </button>
